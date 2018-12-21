@@ -19,7 +19,7 @@ def minimalPolynomialCheck(G, Psi, h):
     for t in h.monomials():
         for g in G:
             q, r = t.quo_rem(Psi[g])
-            if r == 0:
+            if r == 0 :
                 hCoeffT = h.monomial_coefficient(t)
                 gCoeffPsiG = g.monomial_coefficient(Psi[g])
                 return True, hCoeffT/gCoeffPsiG*t//Psi[g]*g
@@ -30,7 +30,7 @@ def reducibilityCheck(G, M, Psi):
         for m in M:
             if(m != Psi[g]):
                 q, r = Psi[g].quo_rem(m)
-                if r == 0:
+                if r == 0 :
                     return g, True
     return None, False
 
@@ -42,7 +42,7 @@ def isNotEmptyTO(inequalities):
     # The upper bounds are epsilon values
     # so we can express strict inequalities
     zeros = [-epsilon for x in range(numInequalities)]
-    ones = [1 for x in range(numVariables)]
+    ones = [1  for x in range(numVariables)]
     # Solutions cannot contain zeros
     result = linprog(ones, A_ub=inequalities,
                      b_ub=zeros, bounds=(epsilon, None))
@@ -57,7 +57,7 @@ def redOneStep(G, M, g):
     for leadingMonomial in M:
         for gMonomial in g.monomials():
             q, r = gMonomial.quo_rem(leadingMonomial)
-            if r == 0:
+            if r == 0 :
                 numerator = g.monomial_coefficient(gMonomial)
                 denominator = G[index].monomial_coefficient(leadingMonomial)
                 t = gMonomial//leadingMonomial
@@ -83,7 +83,7 @@ def containmentIdeals(M1, M2):
         flag = False
         for y in M2:
             q, r = x.quo_rem(y)
-            if r == 0:
+            if r == 0 :
                 flag = True
                 break
         if (not flag):
@@ -150,7 +150,7 @@ def groebnerFan(inputBasis):
         while check:
             h = h - subtract
             check, subtract = minimalPolynomialCheck(G, Psi, h)
-        if h == 0:
+        if h == 0 :
             if (B == []):
                 Lpartial.append((G, M, E, Psi))
             else:
@@ -212,11 +212,12 @@ def groebnerFan(inputBasis):
 
 
 if __name__ == "__main__":
-    R.<x,y,z> = PolynomialRing(QQ)
-    inputBasis = [x^2 - y, y^2 - x*z - y*z]
+    R = PolynomialRing(QQ, names=('x', 'y', 'z',)); (x, y, z,) = R._first_ngens(3)
+    inputBasis = [x^2  - y, y^2  - x*z - y*z]
     result = groebnerFan(inputBasis)
     
     print "Groebner Fan of: ", inputBasis
     for (G, M, E, Psi) in result:
         print "G: ", G, " M: ", M
     print "Size: ", len(result)
+
