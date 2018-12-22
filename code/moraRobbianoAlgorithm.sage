@@ -212,12 +212,15 @@ def groebnerFan(inputBasis):
 
 
 if __name__ == "__main__":
-    R = PolynomialRing(QQ, names=('x', 'y', 'z',)); (x, y, z,) = R._first_ngens(3)
-    inputBasis = [x^2  - y, y^2  - x*z - y*z]
-    result = groebnerFan(inputBasis)
+    R.<x,y,z> = PolynomialRing(QQ)
+    examples = [[x^2  - y, y^2  - x*z - y*z],
+                [y*z + x, x*y + z, x^2 -z^2],
+                [x*y - x, x^2 + x*z, y^2*z + x]]
     
-    print "Groebner Fan of: ", inputBasis
-    for (G, M, E, Psi) in result:
-        print "G: ", G, " M: ", M
-    print "Size: ", len(result)
+    for example in examples:
+        result = groebnerFan(example)
+        print "Groebner Fan of: ", example
+        for (G, M, E, Psi) in result:
+            print "G: ", G, " M: ", M
+        print "Size: ", len(result)
 
