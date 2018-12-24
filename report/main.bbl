@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{MORA1988183}
+Teo Mora and Lorenzo Robbiano.
+\newblock The gröbner fan of an ideal.
+\newblock {\em Journal of Symbolic Computation}, 6(2):183 -- 208, 1988.
+
+\bibitem{Cox:2015:IVA:2821082}
+David~A. Cox, John Little, and Donal O'Shea.
+\newblock {\em Ideals, Varieties, and Algorithms: An Introduction to
+  Computational Algebraic Geometry and Commutative Algebra}.
+\newblock Springer Publishing Company, Incorporated, 4th edition, 2015.
+
+\bibitem{MAYR1982305}
+Ernst~W Mayr and Albert~R Meyer.
+\newblock The complexity of the word problems for commutative semigroups and
+  polynomial ideals.
+\newblock {\em Advances in Mathematics}, 46(3):305 -- 329, 1982.
+
+\bibitem{2014arXiv1408.0313K}
+Nikolai {Krivulin}.
+\newblock {Tropical optimization problems}.
+\newblock {\em arXiv e-prints}, page arXiv:1408.0313, August 2014.
+
+\bibitem{Cox:2014}
+David~A. Cox, John Little, and Donal O'Shea.
+\newblock {\em Using Algebraic Geometry}.
+\newblock Springer Publishing Company, Incorporated, 2th edition, 2004.
+
+\end{thebibliography}

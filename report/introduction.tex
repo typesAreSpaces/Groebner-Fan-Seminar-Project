@@ -1,6 +1,39 @@
 \section{Introduction}
 
-Blah blah
+The Gr\"obner fan of an ideal was introduced in \cite{MORA1988183}.
+This idea was motivated to study all possible reduced Gr\"obner
+basis for all monomial orderings since the latter heavily depends
+on a particular monomial ordering \cite{Cox:2015:IVA:2821082}
+since the main component in many Gr\"obner basis algorithms
+relies on a division algorithm. A simple (and quite expected)
+observation notices that different monomial orderings lead
+different Gr\"obner basis. Moreover, the performance of certain
+algorithms is faster using certain monomial orderings. In addition,
+current complexity results \cite{MAYR1982305} indicate instances
+where th runtime for ideals with polynomials of
+degree at most $d$ is $\mathcal{O}(2^{2^d})$. Hence, it is interesting to
+obtain a characterization of how to transform one Gr\"obner
+basis to another with different monomial ordering due to the expensive
+nature of the algorithm. For ther latter,
+some techniques which are based on the Gr\"obner fan, like Gr\"obner walk,
+provide a solution. More efficient methods might rely on the use of
+Universal Gr\"obner basis. However, the Gr\"obner fan has proven to
+be useful in other areas of mathematics like tropical algebra, auction
+design and optimization problems \cite{2014arXiv1408.0313K}.
+
+Among of the main outcomes of \cite{MORA1988183} are:
+
+\begin{itemize}
+\item There is a one-to-one correspondance between reduced
+  marked Gr\"obner bases with initial ideals.
+\item The set of initial ideals is finite (hence the set of all
+  reduced marked Gr\"obner bases is finite too).
+\item For every initial ideals in $k[x_1, \dots, x_n]$
+  there is a corresponding positive vector in $\real^n$.  
+\end{itemize}
+
+Similarly, in \cite{Cox:2014}, the authours motivated the above points
+throught three questions. However, 
 
 %%% Local Variables:
 %%% mode: latex

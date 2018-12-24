@@ -7,16 +7,33 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
+% Keywords command
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Keywords---}} #1
+}
+
+\newcommand{\real}[0]{\mathbb{R}}
+
 \author{Jos\'e Abel Castellanos Joo}
 \date{\today}
-\title{Groebner fan, related ideas and an algorithm}
+\title{Gr\"obner Fan, related ideas and an algorithm}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-  Ahh
+  In this technical report we discuss the Gr\"obner fan
+  construction. We examine the connections between the
+  Gr\"obner basis algorithm, monomial orderings,
+  Euclidean geometry and linear programming
+  used for the Gr\"obner fan construction. We also provide
+  some examples and a detailed explanation of the algorithm
+  by Mora and Robbiano \cite{MORA1988183}.
 \end{abstract}
+
+\keywords{commutative algebra, computational algebraic geometry, linear programming}
 
 \input{introduction}
 \input{ideas}
@@ -24,5 +41,7 @@
 \input{examples}
 \input{conclusion}
 
+\bibliographystyle{unsrt}
+\bibliography{reference}
 
 \end{document}
