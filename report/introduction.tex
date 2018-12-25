@@ -2,18 +2,18 @@
 
 The Gr\"obner fan of an ideal was introduced in \cite{MORA1988183}.
 This idea was motivated to study all possible reduced Gr\"obner
-basis for all monomial orderings since the latter heavily depends
-on a particular monomial ordering \cite{Cox:2015:IVA:2821082}
+basis for all monomial orders since the latter heavily depends
+on a particular monomial order \cite{Cox:2015:IVA:2821082}
 since the main component in many Gr\"obner basis algorithms
 relies on a division algorithm. A simple (and quite expected)
-observation notices that different monomial orderings lead
+observation notices that different monomial orders lead
 different Gr\"obner basis. Moreover, the performance of certain
-algorithms is faster using certain monomial orderings. In addition,
+algorithms is faster using certain monomial orders. In addition,
 current complexity results \cite{MAYR1982305} indicate instances
 where th runtime for ideals with polynomials of
 degree at most $d$ is $\mathcal{O}(2^{2^d})$. Hence, it is interesting to
 obtain a characterization of how to transform one Gr\"obner
-basis to another with different monomial ordering due to the expensive
+basis to another with different monomial order due to the expensive
 nature of the algorithm. For ther latter,
 some techniques which are based on the Gr\"obner fan, like Gr\"obner walk,
 provide a solution. More efficient methods might rely on the use of
@@ -24,16 +24,60 @@ design and optimization problems \cite{2014arXiv1408.0313K}.
 Among of the main outcomes of \cite{MORA1988183} are:
 
 \begin{itemize}
-\item There is a one-to-one correspondance between reduced
+\item[1.] There is a one-to-one correspondance between reduced
   marked Gr\"obner bases with initial ideals.
-\item The set of initial ideals is finite (hence the set of all
+\item[2.] The set of initial ideals is finite (hence the set of all
   reduced marked Gr\"obner bases is finite too).
-\item For every initial ideals in $k[x_1, \dots, x_n]$
+\item[3.] For every initial ideals in $k[x_1, \dots, x_n]$
   there is a corresponding positive vector in $\real^n$.  
 \end{itemize}
 
-Similarly, in \cite{Cox:2014}, the authours motivated the above points
-throught three questions. However, 
+Similarly, in \cite{Cox:2014}, the authors motivated the above points
+through three questions. An important fact mentioned
+in both \cite{Cox:2014, SturmfelsGrobConv}, which received little attention,
+was about the encoding of monomials orders. I consider this crucial since the
+main focus of our study is to characterize Gr\"obner bases independently
+of the monomial order, hence it is necessary to give a formal representation
+of the latter. For instance in \cite{Cox:2014} this was achieved by
+representing monomial orders using matrices, whereas \cite{SturmfelsGrobConv}
+considered a recursive definition using \emph{vectors} and standard \emph{dot products}
+in $\integer^n$ assuming the existance of an arbitrary term order, which tipically
+is the lexicographical order. In the end, both approaches are useful
+since the main property of these encodings is the relevance of the first
+row of the matrix (initial vector respectively) to define an implicit
+Gr\"obner basis, which is the so called \emph{marked \grob basis}.
+
+Given all these properties, the algorithm by Mora and Robianno \cite{MORA1988183}
+for computing \grob fans exploits the fact that the \grob basis are finite and so
+a naive algorithm of three steps will always terminate. Their approach can be
+studied as follows:
+
+\begin{itemize}
+\item[1.] Given a set of polynomials $S$, compute all possible marked \grob bases
+  by enumerating all possible initial monomials and filter the ones that are
+  feasible using linear programming techniques. The enumeration is a combinatorial
+  process of choosing a initial monomial $m$ for each polynomial $f$ in $S$ and making the
+  correspondant inequalities with each non-initial monomial in $f$. 
+\item[2.] Extend the previous marked \grob bases using a \grob basis algorithm
+  to find new marked \grob basis. This step is motivated by a result in
+  \cite{Cox:2014} which states that the \grob fan cover the positive orthant
+  of $\real^n$. Hence, if this step cannot find more extensions it means
+  the set of marked \grob basis has already covered this section of $\real^n$.
+\item[3.] Filter the previous marked \grob basis by computing the reduced \grob
+  basis. This step give us additionally a complete geometrically characterization
+  of the reduced marked \grob bases and it is important since many of the marked
+  \grob bases computed in the previous step might be the equivallent with different
+  monomial orders. 
+\end{itemize}
+
+We will discuss several examples to illustrate the above algorithm in Section 4. In Section
+2 we will discuss the relevance of the monomial orders, initial monomials, and its relevance
+with the geometric structure that entails the finiteness of the construction \footnote{It is worth
+  mentioning the set of monomial ideals is finite for the commutative case. However, for the non
+  commutative case this construction is not finite as noted by Weispfenning in
+  \cite{10.1007/3-540-51082-6_96}}. In Section 3 we will discuss an implementation of the
+Mora and Robbiano algorithm in the computer algebra system \emph{Sage}.
+
 
 %%% Local Variables:
 %%% mode: latex

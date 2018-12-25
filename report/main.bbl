@@ -27,4 +27,22 @@ David~A. Cox, John Little, and Donal O'Shea.
 \newblock {\em Using Algebraic Geometry}.
 \newblock Springer Publishing Company, Incorporated, 2th edition, 2004.
 
+\bibitem{SturmfelsGrobConv}
+Bernd Sturmfels.
+\newblock Grobner bases and convex polytopes.
+\newblock {\em SERBIULA (sistema Librum 2.0)}, 12 1995.
+
+\bibitem{10.1007/3-540-51082-6_96}
+Volker Weispfenning.
+\newblock Constructing universal gr{\"o}bner bases.
+\newblock In Lloren{\c{c}} Huguet and Alain Poli, editors, {\em Applied
+  Algebra, Algebraic Algorithms and Error-Correcting Codes}, pages 408--417,
+  Berlin, Heidelberg, 1989. Springer Berlin Heidelberg.
+
+\bibitem{linprog}
+scipy.optimize.linprog.
+\newblock
+  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html}.
+\newblock Accessed: 2018-12-23.
+
 \end{thebibliography}
