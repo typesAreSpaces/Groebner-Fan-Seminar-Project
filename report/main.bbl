@@ -39,6 +39,12 @@ Volker Weispfenning.
   Algebra, Algebraic Algorithms and Error-Correcting Codes}, pages 408--417,
   Berlin, Heidelberg, 1989. Springer Berlin Heidelberg.
 
+\bibitem{SageMultivariatePolynomials}
+Generic multivariate polynomials.
+\newblock
+  \url{http://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/multi_polynomial_element.html}.
+\newblock Accessed: 2018-12-23.
+
 \bibitem{linprog}
 scipy.optimize.linprog.
 \newblock

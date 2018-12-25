@@ -17,7 +17,7 @@ we have that $\alpha \cdot \omega^{'} = \beta \cdot \omega^{'}$.
     1 & 0 & 0 \\
     0 & 1 & 0 \\
     0 & 0 & 1 \end{pmatrix}$. This matrix encodes the \emph{graded lexicographical
-    order} for the polynomial ring $k[x, y, z]$. We can see that the first row
+    order} $x > y > z$ for the polynomial ring $k[x, y, z]$. We can see that the first row
   essentially compares the total grade in the exponent of terms and the rest
   of the rows break tie using the lexicographic order.
 \end{example}
@@ -43,9 +43,9 @@ specifying the monomial ordering. For the latter the idea of a
 \emph{marked Gr\"obner basis} was introduced.
 
 \begin{definition} \cite{Cox:2014}
-  A \emph{marked \grob basis} is a set of pairs of polynomials and monomials
+  A \emph{(reduced) marked \grob basis} is a set of pairs of polynomials and monomials
   $\{(f_i, g_i) | i = 1, \dots, r\}$ such that $\{f_i | i = 1, \dots, r\}$ is
-  a \grob basis and $g_i = LT_\prec(f_i)$ for some monomial order $\prec$.
+  a (reduced) \grob basis and $g_i = LT_\prec(f_i)$ for some monomial order $\prec$.
 \end{definition}
 
 The latter definition helps providing an implicit monomial ordering,
@@ -72,12 +72,21 @@ corresponds to the first row of matrix order.
     \includegraphics[width=15cm]{example1}
     \caption{The solution found by scipy.optimize.linprog \cite{linprog} is $x = [0.01, 0.01, 0.01, 0.01]$}
   \end{figure}
-
-  We notice then that the first row for this matrix order are all the same elements. Thus we can suspect
-  a equi-graded order (i.e. an order which doesn't prefer an indeterminate while computing the total
-  grade) is used. 
-  
 \end{example}
+
+We notice then that the first row for the previous matrix order are all the same elements. Thus we can suspect
+an equi-graded order (i.e. an order which doesn't prefer an indeterminate while computing the total
+grade) is used. This phenomenon happens quite frequently, specifically with equi-graded orders. For example,
+consider the graded lexicographical order $x > y > z$ and the graded lexicographical order $y > z > x$. The first
+row of their matrix order will be the same, but the rest of their matrices will be different.
+
+From the previous observation, if we take all the vectors in the $\real^n$ such that they satisfy the set of
+inequalities demanded by a matrix order we will obtain a \emph{cone} in $\real^n$. In \cite{Cox:2014} it is
+shown that the geometry properties of these cones form a fan, which is a structure such that the intersection
+of cones (known as faces) belong to the structure as well as each of the faces of the cones belong to the
+structures. In hindsight, the faces of this structure correspond to elements of the cones such that the
+the dot product cannot distinguish between exponent vectors, hence it is important to rely on the interior
+points of these cones to fully distinguish/classify exponent vectors. 
 
 %%% Local Variables:
 %%% mode: latex

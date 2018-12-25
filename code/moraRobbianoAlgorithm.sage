@@ -104,7 +104,7 @@ def membershipIdealArrayTest(polynomials, Mon):
             if equalIdeals(polynomials, ideal):
                 return True
         return False
-            
+
 # 'inputBasis' is an array of polynomials representing
 # the Groebner basis
 def groebnerFan(inputBasis):

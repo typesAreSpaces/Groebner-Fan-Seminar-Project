@@ -1,7 +1,114 @@
 \section{Mora and Robianno Algorithm:
   Discussion and Implementation in Sage}
 
-Blah blah
+Here is an implementation of the Mora and Robbiano algorithm:
+
+\begin{lstlisting}[language=Python]
+# 'inputBasis' is an array of polynomials representing
+# the Groebner basis
+def groebnerFan(inputBasis):
+    # Initialization
+    L = ([], [], [], {}, [])
+    Lnew = [L]
+    for polynomial in inputBasis:
+        Lold = Lnew
+        Lnew = []
+        for (G, M, E, Psi, B) in Lold:
+            for leadingMonomial in polynomial.monomials():
+                Gnew = G[:]
+                Gnew.append(polynomial)
+                Mnew = M[:]
+                Mnew.append(leadingMonomial)
+                Enew = E[:]
+                for nonLeadingMonomial in polynomial.monomials():
+                    if(nonLeadingMonomial != leadingMonomial):
+                        # We substract the Leading Monomial to the
+                        # Non Leading Monomial because the LP solver
+                        # has <= as default inequalities
+                        Enew.append(subtractExponents(nonLeadingMonomial,
+                                                      leadingMonomial))
+                Psinew = copy.deepcopy(Psi)
+                Psinew[polynomial] = leadingMonomial
+                Bnew = B[:]
+                for g in G:
+                    Bnew.append((g, polynomial))
+                if isNotEmptyTO(Enew):
+                    L = (Gnew, Mnew, Enew, Psinew, Bnew)
+                    Lnew.append(L)
+    # Computation of the Groebner Bases
+    Lwork = Lnew
+    Lpartial = []
+    while (Lwork != []):
+        G, M, E, Psi, B = Lwork.pop()
+        f, g = B.pop()
+        T = lcm(Psi[f], Psi[g])
+        gCoeffPsiG = g.monomial_coefficient(Psi[g])
+        fCoeffPsiF = f.monomial_coefficient(Psi[f])
+        h = gCoeffPsiG*T*f//Psi[f] - fCoeffPsiF*T*g//Psi[g]
+        check, subtract = minimalPolynomialCheck(G, Psi, h)
+        while check:
+            h = h - subtract
+            check, subtract = minimalPolynomialCheck(G, Psi, h)
+        if h == 0 :
+            if (B == []):
+                Lpartial.append((G, M, E, Psi))
+            else:
+                Lwork.append((G, M , E, Psi, B))
+        else:
+            for leadingMonomial in h.monomials():
+                Gnew = G[:]
+                Gnew.append(h)
+                Mnew = M[:]
+                Mnew.append(leadingMonomial)
+                Enew = E[:]
+                for nonLeadingMonomial in h.monomials():
+                    if(nonLeadingMonomial != leadingMonomial):
+                        # We substract the Leading Monomial to the
+                        # Non Leading Monomial because the LP solver
+                        # has <= as default inequalities
+                        Enew.append(subtractExponents(nonLeadingMonomial,
+                                                      leadingMonomial))
+                Psinew = copy.deepcopy(Psi)
+                Psinew[h] = leadingMonomial
+                Bnew = B[:]
+                for g in G:
+                    Bnew.append((g, h))
+                if isNotEmptyTO(Enew):
+                    Lwork.append((Gnew, Mnew, Enew, Psinew, Bnew))
+    # Computation of the Reduced Groebner Bases
+    # and of the Groebner Region
+    Loutput = []
+    Mon = []
+    while (Lpartial != []):
+        G, M, E, Psi = Lpartial.pop()
+        if (not membershipIdealArrayTest(M, Mon)):
+            polynomial, check = reducibilityCheck(G, M, Psi)
+            while check:
+                G.remove(polynomial)
+                M.remove(Psi[polynomial])
+                del Psi[polynomial]
+                polynomial, check = reducibilityCheck(G, M, Psi)
+            for g in G:
+                G.remove(g)
+                M.remove(Psi[g])
+                gnew = red(G, M, g)
+                coeffGNew = gnew.monomial_coefficient(Psi[g])
+                gnew = 1/coeffGNew*gnew
+                G.append(gnew)
+                M.append(Psi[g])
+                tempPsiG = Psi[g]
+                del Psi[g]
+                Psi[gnew] = tempPsiG
+            E = []
+            for g in G:
+                for monomial in g.monomials():
+                    if(monomial != Psi[g]):
+                        E.append(subtractExponents(Psi[g],
+                                                   monomial))
+            Loutput.append((G, M, E, Psi))
+            Mon.append(M)
+    return Loutput
+\end{lstlisting}
 
 
 %%% Local Variables:
