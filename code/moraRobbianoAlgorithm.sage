@@ -105,8 +105,7 @@ def membershipIdealArrayTest(polynomials, Mon):
                 return True
         return False
 
-# 'inputBasis' is an array of polynomials representing
-# the Groebner basis
+# 'inputBasis' is an array of polynomials
 def groebnerFan(inputBasis):
     # Initialization
     L = ([], [], [], {}, [])

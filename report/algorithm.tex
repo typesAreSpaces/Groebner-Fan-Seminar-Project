@@ -1,12 +1,13 @@
 \section{Mora and Robianno Algorithm:
   Discussion and Implementation in Sage}
 
-Here is an implementation of the Mora and Robbiano algorithm:
+Here is an implementation \footnote{Comments in Python begin with \#} of algorithm
+by Mora and Robbiano for computing \grob fan of an ideal:
 
 \begin{lstlisting}[language=Python]
-# 'inputBasis' is an array of polynomials representing
-# the Groebner basis
+# 'inputBasis' is an array of polynomials
 def groebnerFan(inputBasis):
+
     # Initialization
     L = ([], [], [], {}, [])
     Lnew = [L]
@@ -23,7 +24,7 @@ def groebnerFan(inputBasis):
                 for nonLeadingMonomial in polynomial.monomials():
                     if(nonLeadingMonomial != leadingMonomial):
                         # We substract the Leading Monomial to the
-                        # Non Leading Monomial because the LP solver
+                        # Non Leading Monomials because the LP solver
                         # has <= as default inequalities
                         Enew.append(subtractExponents(nonLeadingMonomial,
                                                       leadingMonomial))
@@ -35,6 +36,7 @@ def groebnerFan(inputBasis):
                 if isNotEmptyTO(Enew):
                     L = (Gnew, Mnew, Enew, Psinew, Bnew)
                     Lnew.append(L)
+                    
     # Computation of the Groebner Bases
     Lwork = Lnew
     Lpartial = []
@@ -64,7 +66,7 @@ def groebnerFan(inputBasis):
                 for nonLeadingMonomial in h.monomials():
                     if(nonLeadingMonomial != leadingMonomial):
                         # We substract the Leading Monomial to the
-                        # Non Leading Monomial because the LP solver
+                        # Non Leading Monomials because the LP solver
                         # has <= as default inequalities
                         Enew.append(subtractExponents(nonLeadingMonomial,
                                                       leadingMonomial))
@@ -75,6 +77,7 @@ def groebnerFan(inputBasis):
                     Bnew.append((g, h))
                 if isNotEmptyTO(Enew):
                     Lwork.append((Gnew, Mnew, Enew, Psinew, Bnew))
+
     # Computation of the Reduced Groebner Bases
     # and of the Groebner Region
     Loutput = []
@@ -110,6 +113,37 @@ def groebnerFan(inputBasis):
     return Loutput
 \end{lstlisting}
 
+As mentioned before, the algorithm has three main components. The implementation
+is straightforward once is understood the high level idea. Many additional methods
+where needed to implement separately in order to provide a clean design.
+
+It might be worth mentioning the main data structure used in the algorithm. In
+many parts of the algorithm we will see the common decomposition of an array of
+elements into the tuple $(G, M, E, Psi, B)$. These components stand for the following:
+
+\begin{itemize}
+\item $G$ is the set of polynomials for a \grob basis.
+\item $M$ is the set of monomials keeping track of the leading monomials
+  for the respective $G$.
+\item $E$ is the set of inequalities produced by enumerating the constraints
+  by $G$ and $M$.
+\item $Psi$ is a map (dictionary structure in Python) that associates an element
+  in $G$ with an element in $M$.
+\item $B$ keeps track of the pair of elements in $G$ that have not reduced
+  using Buchberger's criterion in order to avoid unnecessary computations.
+\end{itemize}
+
+In order to test if a set of inequalities define a monomial order (lines 29, 71)
+we used the linear programming library `scipy.optimize.linprog' to find solution
+to the set of inequalities. We realize that the library uses non-strict inequalities
+and the lack of attention of the latter produced bugs in the program since the
+linear solver was accepting set of inequalities that do not define monomial orders.
+The latter was fixed by including a small epsilon value to the non-strict inequalities
+to convert them into strict inequalities. 
+
+Additionally, we used a theorem in \cite{Cox:2015:IVA:2821082}, to be more precise a
+corollary about two monomial ideals being equivalent, to code line 80 in the previous
+implementation.
 
 %%% Local Variables:
 %%% mode: latex
