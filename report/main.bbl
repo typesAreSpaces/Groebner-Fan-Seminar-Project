@@ -63,4 +63,9 @@ Daniel~R. Grayson and Michael~E. Stillman.
 \newblock Macaulay2, a software system for research in algebraic geometry.
 \newblock Available at \url{https://faculty.math.illinois.edu/Macaulay2/}.
 
+\bibitem{2007MaCom..76.2189F}
+Komei {Fukuda}, Anders~N. {Jensen}, and Rekha~R. {Thomas}.
+\newblock {Computing Groebner fans}.
+\newblock {\em Mathematics of Computation}, 76:2189--2212, December 2007.
+
 \end{thebibliography}

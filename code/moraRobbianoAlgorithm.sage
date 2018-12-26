@@ -109,9 +109,13 @@ def membershipIdealArrayTest(polynomials, Mon):
 
 # 'inputBasis' is an array of polynomials
 def groebnerFan(inputBasis):
+    if debug:
+        print "Input Basis: ", inputBasis
     # Initialization
     L = ([], [], [], {}, [])
     Lnew = [L]
+    if debug:
+        print "Lold ------------------------------------------------------"
     for polynomial in inputBasis:
         Lold = Lnew
         Lnew = []
@@ -134,11 +138,14 @@ def groebnerFan(inputBasis):
                 Bnew = B[:]
                 for g in G:
                     Bnew.append((g, polynomial))
+                if debug:
+                    print "G: ", Gnew, " M: ", Mnew
                 if isNotEmptyTO(Enew):
                     L = (Gnew, Mnew, Enew, Psinew, Bnew)
                     Lnew.append(L)
     # Computation of the Groebner Bases
     if debug:
+        print "-----------------------------------------------------------"
         print "Lnew ------------------------------------------------------"
         for (G, M, E, Psi, B) in Lnew:
             print "G: ", G, " M: ", M
@@ -232,7 +239,6 @@ if __name__ == "__main__":
     examples = [[x^2  - y, y^2  - x*z - y*z],
                 [y*z + x, x*y + z, x^2 -z^2],
                 [x*y - x, x^2 + x*z, y^2*z + x]]
-    
     for example in examples:
         result = groebnerFan(example)
         print "Size: ", len(result)

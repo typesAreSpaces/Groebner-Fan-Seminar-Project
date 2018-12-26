@@ -1,0 +1,59 @@
+\begin{example}
+  Let us consider the polynomial ring $\mathbb{Q}[x, y, z]$ and
+  the ideal $\{x^2  - y, y^2  - x*z - y*z\}$. For this example we will
+  use our implementation of the Mora and Robbiano algorithm. We will
+  repeat the same steps as in the previous example highlighting the output
+  produced at each step:
+
+  \begin{itemize}
+  \item Valid monomial orders:
+
+    \begin{itemize}
+      \item $\{(x^2) - y, (y^2) - x*z - y*z\}$ 
+      \item $\{(x^2) - y, y^2 - (x*z) - y*z\}$ 
+      \item $\{(x^2) - y, y^2 - x*z - (y*z)\}$ 
+      \item $\{x^2 - (y), (y^2) - x*z - y*z\}$ 
+      \item $\{x^2 - (y), y^2 - x*z - (y*z)\}$ 
+    \end{itemize}
+
+  \item Marked \grob basis:
+
+    \begin{itemize}
+      \item $\{x^2 - (y), y^2 - x*z - (y*z), x^4 - (x^2*z) - x*z\}$
+      \item $\{x^2 - (y), (y^2) - x*z - y*z, x^4 - (x^2*z) - x*z\}$
+      \item $\{x^2 - (y), (y^2) - x*z - y*z, (x^4) - x^2*z - x*z\}$
+      \item $\{(x^2) - y, y^2 - x*z - (y*z)\}$
+      \item $\{(x^2) - y, y^2 - (x*z) - y*z, -x*y^2 + y^3 - (y^2*z) + y*z\}$
+      \item $\{(x^2) - y, y^2 - (x*z) - y*z, (-x*y^2) + y^3 - y^2*z + y*z, -y^4 + 2*y^3*z - (y^2*z^2) + y*z^2\}$
+      \item $\{(x^2) - y, y^2 - (x*z) - y*z, (-x*y^2) + y^3 - y^2*z + y*z, (-y^4) + 2*y^3*z - y^2*z^2 + y*z^2\}$
+      \item $\{(x^2) - y, (y^2) - x*z - y*z\}$
+    \end{itemize}
+
+  \item Reduced marked \grob basis:
+
+    \begin{itemize}
+      \item $\{(y^2) - x*z - y*z, (x^2) - y\}$
+      \item $\{y^2 - (x*z) - y*z, (-y^4) + 2*y^3*z - y^2*z^2 + y*z^2, (x*y^2) - y^3 + y^2*z - y*z, (x^2) - y\}$
+      \item $\{y^2 - (x*z) - y*z, -y^4 + 2*y^3*z - (y^2*z^2) + y*z^2, (x*y^2) - y^3 + y^2*z - y*z, (x^2) - y\}$
+      \item $\{y^2 - (x*z) - y*z, (x^2) - y, x*y^2 - y^3 + (y^2*z) - y*z\}$
+      \item $\{y^2 - x*z - (y*z), (x^2) - y\}$
+      \item $\{(x^4) - x^2*z - x*z, -x^2 + (y)\}$
+      \item $\{x^4 - (x^2*z) - x*z, -x^2 + (y)\}$
+    \end{itemize}
+  \end{itemize}
+  
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=9cm]{gfanIdeal1}
+    \includegraphics[width=6cm]{ideal1}
+    \caption{(Left) Using gfan to compute the \grob fan of the ideal
+      $\{x^2  - y, y^2  - x*z - y*z\}$; (Right) Visualization of the \grob
+    fan of the ideal $\{x^2  - y, y^2  - x*z - y*z\}$}
+  \end{figure}
+\end{example}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
