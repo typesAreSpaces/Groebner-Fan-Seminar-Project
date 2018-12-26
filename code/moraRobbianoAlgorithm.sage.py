@@ -8,6 +8,8 @@ import copy
 import numpy as np
 from scipy.optimize import linprog
 
+debug = True
+
 # Given two monomials x^vec(a), x^vec(b)
 # returns vec(a) - vec(b) as a tuple
 def subtractExponents(monomial1, monomial2):
@@ -110,8 +112,7 @@ def membershipIdealArrayTest(polynomials, Mon):
                 return True
         return False
 
-# 'inputBasis' is an array of polynomials representing
-# the Groebner basis
+# 'inputBasis' is an array of polynomials
 def groebnerFan(inputBasis):
     # Initialization
     L = ([], [], [], {}, [])
@@ -142,6 +143,11 @@ def groebnerFan(inputBasis):
                     L = (Gnew, Mnew, Enew, Psinew, Bnew)
                     Lnew.append(L)
     # Computation of the Groebner Bases
+    if debug:
+        print "Lnew ------------------------------------------------------"
+        for (G, M, E, Psi, B) in Lnew:
+            print "G: ", G, " M: ", M
+        print "-----------------------------------------------------------"
     Lwork = Lnew
     Lpartial = []
     while (Lwork != []):
@@ -183,6 +189,11 @@ def groebnerFan(inputBasis):
                     Lwork.append((Gnew, Mnew, Enew, Psinew, Bnew))
     # Computation of the Reduced Groebner Bases
     # and of the Groebner Region
+    if debug:
+        print "Lpartial --------------------------------------------------"
+        for (G, M, E, Psi) in Lpartial:
+            print "G: ", G, " M: ", M
+        print "-----------------------------------------------------------"
     Loutput = []
     Mon = []
     while (Lpartial != []):
@@ -213,6 +224,11 @@ def groebnerFan(inputBasis):
                                                    monomial))
             Loutput.append((G, M, E, Psi))
             Mon.append(M)
+    if debug:
+        print "Loutput ---------------------------------------------------"
+        for (G, M, E, Psi) in Loutput:
+            print "G: ", G, " M: ", M
+        print "-----------------------------------------------------------"
     return Loutput
 
 
@@ -224,9 +240,6 @@ if __name__ == "__main__":
     
     for example in examples:
         result = groebnerFan(example)
-        print "Groebner Fan of: ", example
-        for (G, M, E, Psi) in result:
-            print "G: ", G, " M: ", M
         print "Size: ", len(result)
 
 

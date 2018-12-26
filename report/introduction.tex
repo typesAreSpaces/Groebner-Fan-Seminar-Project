@@ -53,20 +53,21 @@ a naive algorithm of three steps will always terminate. Their approach can be
 studied as follows:
 
 \begin{itemize}
-\item[1.] Given a set of polynomials $S$, compute all possible marked \grob bases
-  by enumerating all possible initial monomials and filter the ones that are
-  feasible using linear programming techniques. The enumeration is a combinatorial
+\item[1.] Given a set of polynomials $S$, enumerating all possible initial monomials
+  and filter the ones that are feasible using linear programming techniques.
+  The enumeration is a combinatorial
   process of choosing a initial monomial $m$ for each polynomial $f$ in $S$ and making the
   correspondant inequalities with each non-initial monomial in $f$. 
-\item[2.] Extend the previous marked \grob bases using a \grob basis algorithm
-  to find new marked \grob basis. This step is motivated by a result in
-  \cite{Cox:2014} which states that the \grob fan cover the positive orthant
+\item[2.] Extend the initial set of polynomials to several marked \grob bases
+  (each for every possible monomial order previously computed)
+  using a \grob basis algorithm. This step is motivated by a result in
+  \cite{Cox:2014} which states that the \grob fan covers the positive orthant
   of $\real^n$. Hence, if this step cannot find more extensions it means
   the set of marked \grob basis has already covered this section of $\real^n$.
-\item[3.] Filter the previous marked \grob basis by computing the reduced \grob
-  basis. This step give us additionally a complete geometrically characterization
+\item[3.] Filter the previous marked \grob bases by computing reduced \grob
+  bases. This step give us additionally a complete geometrically characterization
   of the reduced marked \grob bases and it is important since many of the marked
-  \grob bases computed in the previous step might be the equivallent with different
+  \grob bases computed in the previous step might be the equivalent with different
   monomial orders. 
 \end{itemize}
 

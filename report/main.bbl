@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{MORA1988183}
 Teo Mora and Lorenzo Robbiano.
@@ -50,5 +50,17 @@ scipy.optimize.linprog.
 \newblock
   \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html}.
 \newblock Accessed: 2018-12-23.
+
+\bibitem{gfan}
+Anders~N. Jensen.
+\newblock {G}fan, a software system for {G}r{\"o}bner fans and tropical
+  varieties.
+\newblock Available at
+  \url{http://home.imf.au.dk/jensen/software/gfan/gfan.html}.
+
+\bibitem{M2}
+Daniel~R. Grayson and Michael~E. Stillman.
+\newblock Macaulay2, a software system for research in algebraic geometry.
+\newblock Available at \url{https://faculty.math.illinois.edu/Macaulay2/}.
 
 \end{thebibliography}
