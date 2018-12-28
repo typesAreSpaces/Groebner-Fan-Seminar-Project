@@ -3,7 +3,7 @@ import copy
 import numpy as np
 from scipy.optimize import linprog
 
-debug = True
+debug = False
 
 # Given two monomials x^vec(a), x^vec(b)
 # returns vec(a) - vec(b) as a tuple
